@@ -1,9 +1,6 @@
 import {storeToken} from '../actions/authActions';
 import {storeLastTenActivities} from '../actions/activitiesActions';
-
-const CLIENT_ID = 'YOUR_CLIENT_ID';
-const CLIENT_SECRET = 'YOUR_CLIENT_SECRET';
-const REFRESH_TOKEN = 'YOUR_REFRESH_TOKEN';
+import {config} from '../strava';
 
 interface TypedResponse<T = any> extends Response {
   json(): Promise<T>;
@@ -25,24 +22,6 @@ export interface Activity {
   start_date: Date;
   kudos_count: number;
 }
-
-export const getLastTenActivities = async (accessToken: string) => {
-  try {
-    const response: TypedResponse<Activity[]> = await fetch(
-      'https://www.strava.com/api/v3/athlete/activities?page=1&per_page=10',
-      {
-        method: 'GET',
-        headers: {
-          Authorization: 'Bearer ' + accessToken,
-        },
-      },
-    );
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
 
 export const storeLastTenActivitiesCall = async (
   accessToken: string,
@@ -66,15 +45,15 @@ export const storeLastTenActivitiesCall = async (
   }
 };
 
-export const storeTokenCall = async (dispatch) => {
+export const storeTokenCall = async (dispatch, refreshToken: string) => {
   const formData = new FormData();
-  formData.append('client_id', CLIENT_ID);
-  formData.append('client_secret', CLIENT_SECRET);
+  formData.append('client_id', config.clientId);
+  formData.append('client_secret', config.clientSecret);
   formData.append('grant_type', 'refresh_token');
-  formData.append('refresh_token', REFRESH_TOKEN);
+  formData.append('refresh_token', refreshToken);
   try {
     const response: TypedResponse<RefreshToken> = await fetch(
-      'https://www.strava.com/api/v3/oauth/token',
+      config.serviceConfiguration.tokenEndpoint,
       {
         method: 'POST',
         body: formData,
@@ -85,4 +64,35 @@ export const storeTokenCall = async (dispatch) => {
   } catch (error) {
     throw error;
   }
+};
+
+export const storeTokenByCodeCall = async (dispatch, code: string) => {
+  const formData = new FormData();
+  formData.append('client_id', config.clientId);
+  formData.append('client_secret', config.clientSecret);
+  formData.append('grant_type', 'authorization_code');
+  formData.append('code', code);
+  try {
+    const response: TypedResponse<RefreshToken> = await fetch(
+      config.serviceConfiguration.tokenEndpoint,
+      {
+        method: 'POST',
+        body: formData,
+      },
+    );
+    const refreshToken = await response.json();
+    dispatch(storeToken(refreshToken));
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const extractUri = (uri: string) => {
+  var regex = /[?&]([^=#]+)=([^&#]*)/g,
+    params: any = {},
+    match: any;
+  while ((match = regex.exec(uri))) {
+    params[match[1]] = match[2];
+  }
+  return params;
 };
