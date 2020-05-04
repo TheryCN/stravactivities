@@ -19,8 +19,13 @@ export interface Activity {
   name: string;
   distance: number;
   moving_time: number;
-  start_date: Date;
+  elapsed_time: number;
+  start_date: string;
   kudos_count: number;
+  average_speed: number;
+  max_speed: number;
+  location_country: string;
+  total_elevation_gain: number;
 }
 
 export const storeLastTenActivitiesCall = async (
