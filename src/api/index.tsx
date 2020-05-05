@@ -12,6 +12,7 @@ export interface RefreshToken {
   expires_at: number;
   expires_in: number;
   refresh_token: string;
+  athlete: Athlete;
 }
 
 export interface Activity {
@@ -26,6 +27,14 @@ export interface Activity {
   max_speed: number;
   location_country: string;
   total_elevation_gain: number;
+}
+
+export interface Athlete {
+  id: number;
+  firstname: string;
+  lastname: string;
+  state: string;
+  city: string;
 }
 
 export const storeLastTenActivitiesCall = async (

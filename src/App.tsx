@@ -31,6 +31,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import StravaContainer from './components/StravaContainer';
 import ActivityList from './components/ActivityList';
+import AthleteHeader from './components/AthleteHeader';
 
 const App = () => {
   return (
@@ -41,9 +42,9 @@ const App = () => {
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             style={styles.scrollView}>
-            <Header />
             <View style={styles.body}>
               <StravaContainer>
+                <AthleteHeader />
                 <View style={styles.sectionContainer}>
                   <Text style={styles.sectionTitle}>Score</Text>
                   <Score />
