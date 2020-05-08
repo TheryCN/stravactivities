@@ -13,14 +13,14 @@ type AthleteProps = {
  */
 class AthleteHeader extends Component<AthleteProps, {}> {
   render() {
-    let welcome = 'Welcome ';
+    let username = '';
     if (this.props.athlete) {
-      welcome +=
+      username +=
         this.props.athlete.firstname + ' ' + this.props.athlete.lastname;
     }
     return (
       <View>
-        <Text style={styles.header}>{welcome}</Text>
+        <Text style={styles.header}>{username}</Text>
       </View>
     );
   }
@@ -28,9 +28,9 @@ class AthleteHeader extends Component<AthleteProps, {}> {
 
 const styles = StyleSheet.create({
   header: {
-    textAlign: 'center',
-    fontSize: 24,
-    padding: 40,
+    textAlign: 'left',
+    fontSize: 16,
+    padding: 5,
     color: 'white',
     backgroundColor: 'rgb(134, 65, 244)',
   },
