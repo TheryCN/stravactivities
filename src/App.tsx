@@ -37,7 +37,10 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="rgba(134, 65, 244, .8)"
+        />
         <SafeAreaView>
           <StravaContainer>
             <ScrollView
