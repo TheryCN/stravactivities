@@ -51,7 +51,6 @@ class StravaContainer extends Component<StravaContainerProps, {}> {
       this.props.lastTenActivities instanceof Array &&
       this.props.lastTenActivities.length === 0
     ) {
-      console.log('ICIIII', this.props.refreshToken);
       this.props.storeLastTenActivities(this.props.refreshToken.access_token);
     }
   }

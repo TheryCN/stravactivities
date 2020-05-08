@@ -39,11 +39,11 @@ const App = () => {
       <PersistGate loading={null} persistor={persistor}>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={styles.scrollView}>
-            <View style={styles.body}>
-              <StravaContainer>
+          <StravaContainer>
+            <ScrollView
+              contentInsetAdjustmentBehavior="automatic"
+              style={styles.scrollView}>
+              <View style={styles.body}>
                 <AthleteHeader />
                 <View style={styles.sectionContainer}>
                   <Text style={styles.sectionTitle}>Score</Text>
@@ -57,10 +57,9 @@ const App = () => {
                   <Text style={styles.sectionTitle}>Activity List</Text>
                   <ActivityList />
                 </View>
-              </StravaContainer>
-              <LearnMoreLinks />
-            </View>
-          </ScrollView>
+              </View>
+            </ScrollView>
+          </StravaContainer>
         </SafeAreaView>
       </PersistGate>
     </Provider>

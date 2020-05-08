@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BarChart, YAxis, Grid} from 'react-native-svg-charts';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import * as scale from 'd3-scale';
 import {connect} from 'react-redux';
 import {Activity} from '../api';
@@ -49,9 +49,22 @@ class DailyStat extends Component<DailyStatProps, DailyStatState> {
     ],
   };
 
+  componentDidMount() {
+    this.initChartData();
+  }
+
   componentDidUpdate() {
-    const data = this.state.data;
     if (!this.state.init) {
+      this.initChartData();
+    }
+  }
+
+  initChartData() {
+    const data = this.state.data;
+    if (
+      this.props.lastTenActivities &&
+      this.props.lastTenActivities.length > 0
+    ) {
       const today = moment();
       const weekStart = today.startOf('week').subtract(1, 'days');
       this.props.lastTenActivities
