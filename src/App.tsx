@@ -10,7 +10,10 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {
+  createMaterialTopTabNavigator,
+  MaterialTopTabBarOptions,
+} from '@react-navigation/material-top-tabs';
 import {StatusBar} from 'react-native';
 
 import {store, persistor} from './store/store';
@@ -27,6 +30,12 @@ const Tab = createMaterialTopTabNavigator();
  * App.
  */
 const App = () => {
+  const options: MaterialTopTabBarOptions = {
+    indicatorStyle: {
+      backgroundColor: palette.third,
+    },
+  };
+
   return (
     <NavigationContainer>
       <Provider store={store}>
@@ -36,7 +45,7 @@ const App = () => {
             backgroundColor={palette.primary}
           />
           <AthleteHeader />
-          <Tab.Navigator>
+          <Tab.Navigator tabBarOptions={options}>
             <Tab.Screen name="Dashboard" component={Dashboard} />
             <Tab.Screen name="ActivityList" component={ActivityList} />
           </Tab.Navigator>

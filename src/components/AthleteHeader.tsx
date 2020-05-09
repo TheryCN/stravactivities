@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 import {View, Text, StyleSheet} from 'react-native';
 import {Athlete} from '../api';
 import {palette} from './palette';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faRunning} from '@fortawesome/free-solid-svg-icons';
+import {faStarHalf} from '@fortawesome/free-solid-svg-icons';
 
 type AthleteProps = {
   athlete: Athlete;
@@ -19,8 +22,21 @@ class AthleteHeader extends Component<AthleteProps, {}> {
         this.props.athlete.firstname + ' ' + this.props.athlete.lastname;
     }
     return (
-      <View>
-        <Text style={styles.header}>{username}</Text>
+      <View style={styles.header}>
+        <View style={styles.container}>
+          <Text style={styles.auth}>{username}</Text>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.title}>
+            <FontAwesomeIcon icon={faStarHalf} color={'white'} />{' '}
+            StravActivities
+          </Text>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.other}>
+            <FontAwesomeIcon icon={faRunning} color={'white'} />{' '}
+          </Text>
+        </View>
       </View>
     );
   }
@@ -28,11 +44,26 @@ class AthleteHeader extends Component<AthleteProps, {}> {
 
 const styles = StyleSheet.create({
   header: {
-    textAlign: 'left',
-    fontSize: 16,
     padding: 5,
     color: 'white',
     backgroundColor: palette.secondary,
+    lineHeight: 30,
+    flexDirection: 'row',
+  },
+  container: {
+    flex: 1,
+  },
+  title: {
+    textAlign: 'left',
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  auth: {
+    textAlign: 'left',
+    color: 'white',
+  },
+  other: {
+    textAlign: 'right',
   },
 });
 
