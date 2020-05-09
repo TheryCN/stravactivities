@@ -5,6 +5,7 @@ import * as scale from 'd3-scale';
 import {connect} from 'react-redux';
 import {Activity} from '../api';
 import moment from 'moment';
+import {palette} from './palette';
 
 type DailyStatProps = {
   lastTenActivities: Activity[];
@@ -79,7 +80,7 @@ class DailyStat extends Component<DailyStatProps, DailyStatState> {
   }
 
   render() {
-    const fill = 'rgb(134, 65, 244)';
+    const fill = palette.third;
 
     return (
       <View style={{height: 300}}>

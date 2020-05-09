@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {View, Text, StyleSheet} from 'react-native';
 import {Athlete} from '../api';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {palette} from './palette';
 
 type AthleteProps = {
   athlete: Athlete;
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 5,
     color: 'white',
-    backgroundColor: 'rgb(134, 65, 244)',
+    backgroundColor: palette.secondary,
   },
 });
 

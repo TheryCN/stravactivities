@@ -9,6 +9,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import {Activity} from '../api';
+import {palette} from './palette';
 
 type ActivityListProps = {
   lastTenActivities: Activity[];
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   title: {
-    color: 'rgb(134, 65, 244)',
+    color: palette.third,
     fontSize: 16,
   },
 });

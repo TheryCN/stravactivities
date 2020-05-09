@@ -10,7 +10,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {StatusBar} from 'react-native';
 
 import {store, persistor} from './store/store';
@@ -19,8 +19,9 @@ import {Provider} from 'react-redux';
 import Dashboard from './components/Dashboard';
 import AthleteHeader from './components/AthleteHeader';
 import ActivityList from './components/ActivityList';
+import {palette} from './components/palette';
 
-const Stack = createStackNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 /**
  * App.
@@ -31,18 +32,14 @@ const App = () => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <StatusBar
-            barStyle="light-content"
-            backgroundColor="rgba(134, 65, 244, .8)"
+            barStyle="dark-content"
+            backgroundColor={palette.primary}
           />
           <AthleteHeader />
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Dashboard"
-              component={Dashboard}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen name="ActivityList" component={ActivityList} />
-          </Stack.Navigator>
+          <Tab.Navigator>
+            <Tab.Screen name="Dashboard" component={Dashboard} />
+            <Tab.Screen name="ActivityList" component={ActivityList} />
+          </Tab.Navigator>
         </PersistGate>
       </Provider>
     </NavigationContainer>
