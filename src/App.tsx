@@ -23,6 +23,7 @@ import Dashboard from './components/Dashboard';
 import AthleteHeader from './components/AthleteHeader';
 import ActivityList from './components/ActivityList';
 import {palette} from './components/palette';
+import StravaContainer from './components/StravaContainer';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -44,11 +45,13 @@ const App = () => {
             barStyle="dark-content"
             backgroundColor={palette.primary}
           />
-          <AthleteHeader />
-          <Tab.Navigator tabBarOptions={options}>
-            <Tab.Screen name="Dashboard" component={Dashboard} />
-            <Tab.Screen name="ActivityList" component={ActivityList} />
-          </Tab.Navigator>
+          <StravaContainer>
+            <AthleteHeader />
+            <Tab.Navigator tabBarOptions={options}>
+              <Tab.Screen name="Dashboard" component={Dashboard} />
+              <Tab.Screen name="ActivityList" component={ActivityList} />
+            </Tab.Navigator>
+          </StravaContainer>
         </PersistGate>
       </Provider>
     </NavigationContainer>

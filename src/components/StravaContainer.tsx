@@ -8,7 +8,7 @@ import {
   storeTokenByCodeCall,
 } from '../api';
 import {connect} from 'react-redux';
-import {View, Linking} from 'react-native';
+import {View, Linking, StyleSheet} from 'react-native';
 import {authorizationEndpoint} from '../strava';
 
 type StravaContainerProps = {
@@ -56,9 +56,15 @@ class StravaContainer extends Component<StravaContainerProps, {}> {
   }
 
   render() {
-    return <View>{this.props.children}</View>;
+    return <View style={styles.container}>{this.props.children}</View>;
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 const mapStateToProps = (state) => {
   // Redux Store --> Component
